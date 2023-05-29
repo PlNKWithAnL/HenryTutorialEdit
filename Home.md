@@ -1,1 +1,1 @@
-Welcome to the HenryTutorial wiki!
+good luck have fun but you don't need luck you're a bout to get the skill
