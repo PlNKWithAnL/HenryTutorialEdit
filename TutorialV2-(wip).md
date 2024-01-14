@@ -1,5 +1,4 @@
 # Overview
-This is the in-progress tutorial for the rewrite1 branch. If you the want shiny new tech this should take you most of the way.
 This tutorial will go over custom character creation for Risk of Rain 2. It assumes a basic understanding of Unity and C# at the very least. If you don't have that and get stuck, look up tutorials! I can't teach you everything here.
 
 ## Getting Started
@@ -19,7 +18,7 @@ The software generally used to create and animate models is [Blender](https://ww
 When creating a character model:
 - it's important to note due to reasons explained below that you're limited to having one material per mesh. 
   - There is, however, no limit to the amount of meshes you can have on your model.
-- See the [Survivor Model Tips]() for more info on how we've learned to make survivors over the years.
+- See the [Survivor Model Tips]() page for more info on how we've learned to make survivors over the years.
  
 When exporting your character model from blender into Unity, it's important to fix a scaling issue that can happen if your export settings aren't set correctly.  
 Here are the recommended FBX export settings:  
@@ -101,23 +100,27 @@ This step is very important in order to avoid conflicts with other mods.
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/6f06d99a-f332-45a1-9741-c50752a31f1f)  
 It's a lot, but everything related to henry is contained within the Henry folder there.
 
-## Step 2 - CharacterBody Setup
+- Open up the (now renamed) `HenryTokens.cs`  
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/0b32dd81-cb5d-4408-af66-769049e03da7)  
+You can save this for later, but this is where all the text for your character is registered into the game. Remember to use this prefix to avoid conflicts with other mods. You'll set this in the next step.
 
+## Step 2 - CharacterBody Setup
 - Next you're going to want to create a class for the survivor you're creating. `SurvivorBase` is an abstract class that you can inherit from that takes care of most of the work for you. You can work with or copy the `HenrySurvivor` class which implements this.  
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/92220ecf-fc73-4c60-9b08-da59e0f9a2e4)
 
 - Open up this (hopefully renamed) class and you'll see some important fields you need to fill out for your character setup.  
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/36033700-d5c3-4a39-9fc3-0d24dd306029)
-  - Set `assetBundleName` to the name of the assetbundle you created before. This <ins>must</ins> be changed to avoid conflicts.
+  - <ins>Set `assetBundleName` to the name of the assetbundle you created before</ins>. This <ins>must</ins> be changed to avoid conflicts.
     - If you skipped the unity section above and just want to build the project with henry, you must still rename this field, and as such rename the file for the assetbundle to match.
-  - Set `bodyName` to a unique name for your character, conventionally ending in Body. 
+  - <ins>Set `bodyName` to a unique name for your character</ins>, conventionally ending in Body. 
     - This is the internal name that's not seen by the player, so it can be whatever you want, but make sure it's unique, as having duplicate bodies in the game tends to break things horribly.
-  - Set `masterName` to a unique name for your character. This will house the AI of your character when spawned with vengeance or goobo. Again, this is to avoid duplicate conflicts.
+  - <ins>Set `masterName` to a unique name for your character</ins>. This will house the AI of your character when spawned with vengeance or goobo. Again, this is to avoid duplicate conflicts.
   - Set `modelPrefabName` and `displayPrefabName` to the according prefabs you created in unity. This is what the project's code will use to load your character.
   - Rename `HENRY_PREFIX` as you see fit, and use the `DEVELOPER_PREFIX` from earlier. This will make adding unique language tokens easy.
   - Now's a good chance to rename the HenryMod.Survivors.Henry namespace if you haven't.
 
 The most important conflict-avoiding part of the process is out of the way. Now we can finally get to the fun stuff.
+
 - This is the `bodyInfo` of your character. This code right here is what sets up your entire `CharacterBody` prefab.
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/4c5ac1ca-3465-450b-8ff7-800dea8a6cc7)
 - Feel free to look at the `BodyInfo` class to see more options like other stats and camera stuff. The most important ones are here so you're likely not to need to.
@@ -162,7 +165,7 @@ public override CustomRendererInfo[] customRendererInfos => new CustomRendererIn
         }
 };
 ```
-- Note: note if you have all your materials on your model in unity, you may be able to avoid all this by simply specifying the childnames:
+- Note: if you have all your materials on your model in unity, you may be able to avoid all this by simply specifying the childnames:
 
 ```
 public override CustomRendererInfo[] customRendererInfos => new CustomRendererInfo[]
@@ -180,57 +183,110 @@ public override CustomRendererInfo[] customRendererInfos => new CustomRendererIn
  - If no material is passed in, whatever material that's currently on your renderers in unity will be transferred to hopoo materials and applied to rendererinfos.
 
 With all that taken care of, you should now have a working character that can be selected and played with ingame! If you run into any issues at this point be sure to go back through and make sure you've followed every step properly.  
-There may be a few placeholdery things that might get in your way, so work through them if they come up.
+Follow the [Building the Mod]() page to make sure you structure your mod install properly.
 
+# To go further
+Now that setup part of the character is done there's a few more things to do to truly complete your survivor. These are aspects that have been streamlined with this template, but are ultimately up to you to figure out how you go about!
 
-## Step 4 - Skill Setup
+## 0. About the Template
+Past the CharacterBody setup and CharacterModel setup from earlier, there are a few more fields
 
-After all this only a few things remain to have a truly complete character.
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/7d845040-c23e-42a6-8324-1fbe85ed8fee)
+- `characterUnlockableDef` and `itemDisplays` will be explained below. It's possible to set these as null for now.
+- The `assetBundle` is set on initialization using the `assetBundleName` you set earlier. As you can guess, you'll be using this to load the assets for your character.
+  - With this, if you have multiple characters, you can have separate assetbundles for each.
+- The following fields are all set in character initialization. They are exposed here for you to use as you further build up your character (mainly the bodyPrefab)
+- `CharacterBase` is a singleton. Not shown here is an `instance` field that will allow you to access information from this class from anywhere else (mainly to use the assetBundle).
 
-`InitializeHitboxes` is there to create melee hitboxes.
+Initialization:
 
-![](https://cdn.discordapp.com/attachments/469291841859092488/829082643404423182/unknown.png) 
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/27a5951b-9059-4526-a504-dad74a26e6f6)
 
-I'll admit it's not the cleanest and there's surely a way I can streamline this further. But from here, if you have a melee hitbox you want to add then you just need to set it up in the `ChildLocator` as you did with all the other things before. Change up some of this code to accommodate your needs and it should be good. See Henry's prefab for an example of what hitboxes are supposed to look like.
+The code here is self explanatory or commented, this is where all the magic happens. We'll go into further detail in the sections below
 
+## 1. Skill Setup
+
+#### EntityStateMachines
+First and foremost, your character needs `EntityStateMachines`:
+
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/86b6d745-cff8-4e2a-a9fb-c37b98f0654d)
+- A State Machine, as it sounds, is what governs the state your character is in. In ror2 you can have multiple state machines so that multiple states can happen at the same time, within your control.
+- When you create skills, you will assign them to these state machines.
+- The "Body" state machine typically has `GenericCharacterMain` as its main state. You can take a look at that class in the game's code to see why.
+  - You can also create your own `EpicCharacterMain` class that inherits from it, to add your own functionality to the character as it is in its main state.
+
+#### Hitboxes
+Feel free to skip this section if you aren't going to do any melee attacks.
+
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/4e141485-4b12-45ce-9e64-9f080c3b43aa)
+
+- Here's an example of how you can set up a `HitBoxGroup` for your character to use in `OverlapAttacks` (most commonly melee attacks). 
+  - To use this, create an empty gameobject in unity under your character prefab, and add it to your ChildLocator. 
+  - Then use the name of that child here.
+- A HitBox in this game is just a transform, where the game runs `Physics.OverlapBox` using the dimensions of the transform.
+  - These are the cube hitboxes you see if you check out the hitbox viewer.  
+  - You can look at the scene in the henry unity project for an example of what a hitbox looks like.
+
+#### Finally, Skills
 `InitializeSkills` method contains all the code for setting up your character's `SkillDefs`. It should be fairly self-explanatory and easy to work with.
 
-![](https://cdn.discordapp.com/attachments/469291841859092488/814505978523418714/unknown.png) 
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/579fc1f3-03d8-48e3-84a8-f88a82eafe62)
 
 So this is about as simple as it can get. Using `Skills.CreateSkillDef` you create the `SkillDef` for your skill and fill in all the values with what you need.
+- `skillName` is the internal name of the skill used by saving/loading profiles
+- `keywordTokens` are the keywords that pop up when you hover over the skill in the character select screen
 - `activationState` is the state you're activating when you use the skill
 - `activationStateMachineName` is a bit complicated, simply put you want `Weapon` if it's a skill that allows you to move while using it and `Body` if you don't want that
-- `baseMaxStock` is the stock you start with
-- `baseRechargeInterval` is the skill cooldown
-- `beginSkillCooldownOnSkillEnd` determines whether the skill cooldown starts when the skill starts or ends
-- `canceledFromSprinting` determines whether the skill is cancelled by sprint inputs
-- `forceSprintDuringState` determines whether your character is forced to sprint during the skill
-- `fullRestockOnAssign` should just be set to true
 - `interruptPriority` will be explained down below
-- `resetCooldownTimerOnUse` is for ammo primaries like Bandit's and Visions of Heresy, resets the cooldown to 0 on use
+- `baseRechargeInterval` is the skill cooldown
+- `baseMaxStock` is the stock you start with
+- `rechargeStock` is how many stocks you regain after every cooldown. usually for "ammo" type skills like visions of heresy
+- `requiredStock` is how many stocks are required to use the skill. Usually set to 0 for primary attacks, or other unique kind of skills
+- `stockToConsume` is how many stocks this skill loses on use. Usually set to 0 for fancy skills that will deduct the cooldown in different ways. 
+- `resetCooldownTimerOnUse` usually used for "ammo" type skills like visions of heresy.
+- `fullRestockOnAssign` is usually set to true.
+- `dontAllowPastMaxStocks` is usually set to false.
+- `mustKeyPress` determines whether the skill is automatically reactivated when held. false is recommended in most cases
+- `beginSkillCooldownOnSkillEnd` is usually used for charged or aimed moves and the like.
 - `isCombatSkill` determines whether out of combat effects like `Red Whip` are cancelled on use
-- `mustKeyPress` determines whether the skill can be activated by tapping or holding- false is recommended in most cases
+- `canceledFromSprinting` determines whether the skill is cancelled by sprint inputs
 - `cancelSprintingOnActivation` determines whether the skill cancels sprint on use
-- `rechargeStock` is how many stocks you regain after every cooldown
-- `requiredStock` is how many stocks are required to use the skill
-- `stockToConsume` is how many stocks this skill loses on use
-- `keywordTokens` is an array of strings that determines what keywords the skill has
+- `forceSprintDuringState` determines whether your character is forced to sprint during the skill
 
-So once you've created your `SkillDef`, `Skills.AddSecondarySkill()` will add it to the character pain free. You can add as many skills as you want with this method. For the rest of the skills you just need to do the same thing, but with `AddUtilitySkill()` and `AddSpecialSkill()`.
+So once you've created your `SkillDef`, `Skills.AddPrimarySkill()`, `Skills.AddSecondarySkill()`, etc, will add it to the character pain free. You can add as many skills as you want with this method.
 
-## Step 5 - Skins
+#### Skill States
+- Go nuts.
+- Some states have been included as examples, but there's also an entire library of skills in the base game and other mods to look to for reference.
+- Don't forget to register your state as henry does in the `HenryStates` class
+
+## 2. Skins
 
 If you don't have any skins, you don't need to worry about this section. A basic default skin is set up. All you might need to mess with are the name token and the icon.
 
 Skin creation isn't streamlined as much as I'd like but it's not too bad to work with as of now. Inside the `InitializeSkins` method, you'll see this code:
 
-![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Ass/HenryTutorialImages/Step5-1_Skins.png)  
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/e2452732-33be-4676-a938-d7f7ee3ae252)
 
 Most of it can be ignored. It's just grabbing the necessary components and adding the `ModelSkinController` as well as creating a `List` of our `SkinDefs`. The rest of the skin code is below.  
 
 Not too keen on explaining it all since it's so poorly written but the rest of this method should be fairly easy to understand. If not feel free to harass timesweeper with your questions.
 
-## Step 6 - Item Displays
+## 3. Character Master (AI (Vengeance Doppelganger))
+
+All survivors and enemies and other in this game are Characters. 
+- A Character is very modular in RoR2, where a survivor is simply a player-controlled character, and an enemy is simply an ai-controlled character.
+- This is why enemies can have items, why you can spawn as an enemy and use its attacks, and why AI can be applied to survivors.
+
+When you create a character, you should also create a Character Master for it to be controlled by AI.
+- A character master is simply an object that performs inputs on a character body.
+- AI in this game has been simplified to components on the master, so it's easy for anyone to write AI for their character.
+
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/71cb817f-e6b5-4e9b-8905-73b40539664d)  
+it's as the comments say
+
+
+## 4. Item Displays
 
 Ah yes, who doesn't love 2400 lines of grueling, tedious code, doing nothing but copy pasting blocks and blocks of code and then typing in values.
 
@@ -245,14 +301,7 @@ Go into the `HenryItemDisplays` class and all the items rules have been written,
 
 Seriously, this section would've been a lot longer without that tool.
 
-## Step 7 - Character Master (Vengeance Doppelganger) (wip)
-
-![](https://cdn.discordapp.com/attachments/469291841859092488/829083472084860988/unknown.png)  
-
-By default, a simple clone of Mercenary's AI is used. I haven't streamlined anything for AI creation beyond copying an existing AI.  
-This is automatically done in CharacterBase so you don't need to worry about it if you don't want to.
-
-## Step 8 - Unlockables
+## 5. Unlockables (wip)
 
 I'll elaborate on this more sometime but unlockables are basically just hooking a game event like `onClientGameOverGlobal` for example and checking if you've met the proper conditions for the unlock.
 
