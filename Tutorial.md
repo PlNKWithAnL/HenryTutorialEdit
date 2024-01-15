@@ -41,7 +41,7 @@ Once that's done, follow these steps:
   6. Create more entries in your `ChildLocator` for every mesh you have in your model and drag those in where necessary. The names don't matter because you'll fill in that part in the code.
   7. Drag your `GameObject` into the `Project` window to create a new prefab. when prompted, make a `Prefab Variant`. Make sure the name of this prefab in the project window is "mdlYourCharacterName" as before.
   8. Duplicate the object in the scene. Drag that object into the `Project` window to create another prefab, and when prompted, make another `Prefab Variant`. Then change the name of this to "YourCharacterNameDisplay". Remember the name you set here as well.  
-      - This will be your display prefab used in the lobby. Here we usually the `Animator` to a new one that just plays the lobby animation. 
+      - This will be your display prefab used in the lobby. Here we usually the replace `Animator` to a new one that just plays the lobby animation. 
   9. Once this is all done, open the AssetBundle Browser and create a new AssetBundle (If you don't have the AssetBundle Browser window, go to Windows > Packages and there you can install it). Drag whatever assets you're using into there and build it. I like to have everything I need in a single folder and just drag that to keep things simple.
  10. If this was done right, you should be able to navigate to where you built the AssetBundle and see a game ready bundle. 
      - If you've cloned the HenryTutorial repo, I recommend to navigate to `Build\plugins\AssetBundles` and put your new assetbundle into this folder, replacing the `myassetbundle` file that you see there.
