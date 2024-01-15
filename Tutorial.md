@@ -185,7 +185,7 @@ public override CustomRendererInfo[] customRendererInfos => new CustomRendererIn
 ### You're done kinda!
 
 With all that taken care of, you should now have a working character that can be selected and played with ingame! If you run into any issues at this point be sure to go back through and make sure you've followed every step properly.  
-Follow the [Building the Mod(under construction)]() page to make sure you structure your mod install properly.
+Follow the [Building the Mod(under construction)](https://github.com/ArcPh1r3/HenryTutorial/wiki/Building-the-Mod) page to make sure you structure your mod install properly.
 
 # Developing your Character
 Now that setup part of the character is done there's a few more things to do to truly complete your survivor. These are aspects that have been streamlined with this template, but are ultimately up to you to figure out how you go about!
@@ -348,10 +348,8 @@ Unlocks are generally optional but people like having them, and it's a good way 
 
 --------------------
 
-That should cover just about everything. See [this page(under construction)]() for how to properly build and install your mod.  
-If there's anything I'm missing or anything that doesn't make sense feel free to let me know in the modding discord (`thetimesweeper`).  
+That should cover just about everything. See [this page(under construction)](https://github.com/ArcPh1r3/HenryTutorial/wiki/Building-the-Mod) for how to properly build and install your mod.  
+If there's anything I'm missing or anything that doesn't make sense feel free to let me (`thetimesweeper`) know in the modding discord.  
 Remember, the discord is there to answer your questions and help you along the journey. There's loads of experience you can call upon there.
 
 Happy modding!
-
---------------------
