@@ -1,12 +1,12 @@
 # Overview
 This tutorial will go over custom character creation for Risk of Rain 2. It assumes a basic understanding of Unity and C# at the very least. If you don't have that and get stuck, look up tutorials! I can't teach you everything here.
 
-## Getting Started
+# Getting Started
 Creating a character is a daunting task. Between modeling, animation, coding, skill icons, sounds, VFX and more there's a whole lot that goes into it. Don't expect it to be an easy process.
 
 The first step would be cloning this repo and opening up `HenryMod.sln` in `Visual Studio`.
 
-The recommended starting point is skill creation. [This](https://risk-of-thunder.github.io/R2Wiki/Mod-Creation/Assets/Skills/) tutorial is a good place to start. Keep in mind, step 1 of that tutorial goes over adding the skill to a body, which is already streamlined with Henry. When you come back here to add your skills, your work in step 2 and onwards is what will transfer over.
+The recommended starting point is skill creation. [This](https://risk-of-thunder.github.io/R2Wiki/Mod-Creation/Assets/Skills/) tutorial is a good place to start. Keep in mind, step 1 of that tutorial goes over adding the skill to a body, which is already streamlined with Henry. As you follow the skills tutorial, step 2 and onwards is what will transfer over here.
 
 Creating skills is a pretty specific process that involves a lot of hard coding that greatly differs depending on what you want the skill to do, so there's not a whole lot that can be explained here. 3 basic types of attacks, OverlapAttacks (melee), BulletAttacks (hitscan) and Projectiles have been included as examples. 
 
@@ -16,9 +16,9 @@ Once you have skills down, then it's time to move on to creating assets. Of cour
 The software generally used to create and animate models is [Blender](https://www.blender.org/)- even Hopoo himself uses it. There's lots of tutorials out there so Blender is the one I recommend. However if you're comfortable with something else feel free to use that.
 
 When creating a character model:
-- it's important to note due to reasons explained below that you're limited to having one material per mesh. 
+- it's important to note that you're limited to having one material per mesh. 
   - There is, however, no limit to the amount of meshes you can have on your model.
-- See the [Survivor Model Tips]() page for more info on how we've learned to make survivors over the years.
+- See the [Survivor Model Tips(under construction)]() page for more info on how we've learned to make survivors over the years.
  
 When exporting your character model from blender into Unity, it's important to fix a scaling issue that can happen if your export settings aren't set correctly.  
 Here are the recommended FBX export settings:  
@@ -58,15 +58,11 @@ Assuming you've cloned the HenryTutorial repo for this one, and have a basic und
 `CharacterBody` is the main component that handles most things relating to a character. This handles things like base stats, crosshairs, item interactions, etc. There's way too many things for me to go over so it's best to learn about this through experience.  
 Henry's code takes care of all of the setup for this when creating your own body so don't stress over it too much.
 
-#### HealthComponent
-
-`HealthComponent` is pretty self-explanatory. It keeps track of character health and handles all instances of damage being dealt. When creating on-hit effects and such this is where you'll generally be hooking.
-
 #### CharacterModel
 
-CharacterModel is the component attached to every character model. It uses something called 'baseRendererInfos' to handle things like overlays and skins.
+CharacterModel is the component attached to every character model. It uses something called 'BaseRendererInfos' to handle things like overlays and skins.
 
-A `RendererInfo` consists of mainly a `renderer` (MeshRenderer, SkinnedMeshRenderer, ParticleSystemRenderer, etc.) and a `defaultMaterial`. The `ignoreOverlays` field (self-explanatory what this does) should be set to false if you encounter issues like weird shield outlines.
+A `BaseRendererInfo` consists of mainly a `renderer` (MeshRenderer, SkinnedMeshRenderer, ParticleSystemRenderer, etc.) and a `defaultMaterial`. The `ignoreOverlays` field (self-explanatory what this does) should be set to false if you encounter issues like weird shield outlines.
 
 #### ChildLocator
  
@@ -74,7 +70,7 @@ A simple component that's used to easily reference child objects. This is useful
 
 #### InputBankTest
 
-The `InputBank` is used to cache inputs from players as well as fake inputs from AI. You shouldn't need to use this much aside from a few skill interactions, like primary attack combos.
+The `InputBank` is used to cache inputs from players as well as fake inputs from AI. You shouldn't need to use this much aside from a few skill interactions, like charge attacks.
 
 * * *
 
@@ -115,9 +111,9 @@ You can save this for later, but this is where all the text for your character i
   - <ins>Set `bodyName` to a unique name for your character</ins>, conventionally ending in Body. 
     - This is the internal name that's not seen by the player, so it can be whatever you want, but make sure it's unique, as having duplicate bodies in the game tends to break things horribly.
   - <ins>Set `masterName` to a unique name for your character</ins>. This will house the AI of your character when spawned with vengeance or goobo. Again, this is to avoid duplicate conflicts.
-  - Set `modelPrefabName` and `displayPrefabName` to the according prefabs you created in unity. This is what the project's code will use to load your character.
+  - Set `modelPrefabName` and `displayPrefabName` to the according prefabs you created in unity. This is what the template's code will use to load your character.
   - Rename `HENRY_PREFIX` as you see fit, and use the `DEVELOPER_PREFIX` from earlier. This will make adding unique language tokens easy.
-  - Now's a good chance to rename the HenryMod.Survivors.Henry namespace if you haven't.
+  - Now's a good chance to rename the `HenryMod.Survivors.Henry` namespace if you haven't.
 
 The most important conflict-avoiding part of the process is out of the way. Now we can finally get to the fun stuff.
 
@@ -136,6 +132,10 @@ If this is done properly, you'll now have everything in place for the code to bu
 ## Step 3 - CharacterModel Setup
 
 This step is crucial if you want your character to look good and authentic ingame. All that `ChildLocator` stuff from before, linking all the meshes, comes into play here.  
+
+Recall that the `CharacterModel` component holds `BaseRendererInfos` which reference to your model's `renderers` and `materials`. Since we're setting up our character in code, we're going to use our `ChildLocator` and to find these renderers and add our `BaseRendererInfos`.
+
+For the Unity inclined, there is a more [editor friendly approach(under construction)](), but continue on if you prefer code.
 
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/edfb51cf-a8c6-4de4-a65e-f764c46aa0b9)  
 This is the magic code that adds a `CharacterModel` component with proper `RendererInfos` to your character:
@@ -182,21 +182,24 @@ public override CustomRendererInfo[] customRendererInfos => new CustomRendererIn
 ```
  - If no material is passed in, whatever material that's currently on your renderers in unity will be transferred to hopoo materials and applied to rendererinfos.
 
-With all that taken care of, you should now have a working character that can be selected and played with ingame! If you run into any issues at this point be sure to go back through and make sure you've followed every step properly.  
-Follow the [Building the Mod]() page to make sure you structure your mod install properly.
+### You're done kinda!
 
-# To go further
+With all that taken care of, you should now have a working character that can be selected and played with ingame! If you run into any issues at this point be sure to go back through and make sure you've followed every step properly.  
+Follow the [Building the Mod(under construction)]() page to make sure you structure your mod install properly.
+
+# Developing your Character
 Now that setup part of the character is done there's a few more things to do to truly complete your survivor. These are aspects that have been streamlined with this template, but are ultimately up to you to figure out how you go about!
 
 ## 0. About the Template
-Past the CharacterBody setup and CharacterModel setup from earlier, there are a few more fields
+Past the `CharacterBody` setup and `CharacterModel` setup from earlier, there are a few more fields
 
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/7d845040-c23e-42a6-8324-1fbe85ed8fee)
 - `characterUnlockableDef` and `itemDisplays` will be explained below. It's possible to set these as null for now.
 - The `assetBundle` is set on initialization using the `assetBundleName` you set earlier. As you can guess, you'll be using this to load the assets for your character.
   - With this, if you have multiple characters, you can have separate assetbundles for each.
-- The following fields are all set in character initialization. They are exposed here for you to use as you further build up your character (mainly the bodyPrefab)
+- The fields following are all set in character initialization. They are exposed here for you to use as you further build up your character if you need (mainly the bodyPrefab)
 - `CharacterBase` is a singleton. Not shown here is an `instance` field that will allow you to access information from this class from anywhere else (mainly to use the assetBundle).
+  - for exampe `HenrySurvivor.instance.assetBundle.LoadAsset<Sprite>("someIcon")`
 
 Initialization:
 
@@ -206,7 +209,7 @@ The code here is self explanatory or commented, this is where all the magic happ
 
 ## 1. Skill Setup
 
-#### EntityStateMachines
+#### 1-1. EntityStateMachines
 First and foremost, your character needs `EntityStateMachines`:
 
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/86b6d745-cff8-4e2a-a9fb-c37b98f0654d)
@@ -215,27 +218,24 @@ First and foremost, your character needs `EntityStateMachines`:
 - The "Body" state machine typically has `GenericCharacterMain` as its main state. You can take a look at that class in the game's code to see why.
   - You can also create your own `EpicCharacterMain` class that inherits from it, to add your own functionality to the character as it is in its main state.
 
-#### Hitboxes
-Feel free to skip this section if you aren't going to do any melee attacks.
+#### 1-2. Skills
+- Your character's `skill`s are `def`ined in what's called a `SkillDef`. Mind blowing I know.
+- The action that you take when you execute a skill is called an `EntityState` while the `SkillDef` governs the icon and cooldown and all that good stuff on the bottom of your screen.
+- While the `SkillDef` holds the information, on your character are `GenericSkill` components that hold your currently selected `SkillDef`
+- You then have a `SkillLocator` component which holds a reference to your respective `GenericSkill` components for Primary, Secondary, Utility, and Special, so your main state can call on them and perform your skills.
+- Sounds like a lot, but tl;dr: `SkillLocator` => `GenericSkill` => `SkillDef` => `EntityState` => ??? => Profit
 
-![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/4e141485-4b12-45ce-9e64-9f080c3b43aa)
-
-- Here's an example of how you can set up a `HitBoxGroup` for your character to use in `OverlapAttacks` (most commonly melee attacks). 
-  - To use this, create an empty gameobject in unity under your character prefab, and add it to your ChildLocator. 
-  - Then use the name of that child here.
-- A HitBox in this game is just a transform, where the game runs `Physics.OverlapBox` using the dimensions of the transform.
-  - These are the cube hitboxes you see if you check out the hitbox viewer.  
-  - You can look at the scene in the henry unity project for an example of what a hitbox looks like.
-
-#### Finally, Skills
 `InitializeSkills` method contains all the code for setting up your character's `SkillDefs`. It should be fairly self-explanatory and easy to work with.
+
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/14ba5825-01e3-4f25-aa13-f23547ace368)  
+The `CreateSkillFamilies` will create `GenericSkills` on your bodyPrefab for your four skill slots, and create `SkillFamilies` for them. As you can guess, `SkillFamilies` are what hold your Skill `Variants` that you can select in loadout.
 
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/579fc1f3-03d8-48e3-84a8-f88a82eafe62)
 
 So this is about as simple as it can get. Using `Skills.CreateSkillDef` you create the `SkillDef` for your skill and fill in all the values with what you need.
 - `skillName` is the internal name of the skill used by saving/loading profiles
 - `keywordTokens` are the keywords that pop up when you hover over the skill in the character select screen
-- `activationState` is the state you're activating when you use the skill
+- `activationState` is the `EntityState` you're entering when you use the skill
 - `activationStateMachineName` is a bit complicated, simply put you want `Weapon` if it's a skill that allows you to move while using it and `Body` if you don't want that
 - `interruptPriority` will be explained down below
 - `baseRechargeInterval` is the skill cooldown
@@ -255,10 +255,27 @@ So this is about as simple as it can get. Using `Skills.CreateSkillDef` you crea
 
 So once you've created your `SkillDef`, `Skills.AddPrimarySkill()`, `Skills.AddSecondarySkill()`, etc, will add it to the character pain free. You can add as many skills as you want with this method.
 
-#### Skill States
+#### 1-3. EntityStates
 - Go nuts.
 - Some states have been included as examples, but there's also an entire library of skills in the base game and other mods to look to for reference.
 - Don't forget to register your state as henry does in the `HenryStates` class
+
+#### 1-4. SkillDefs, Expanded
+- A `SkillDef` is more than just a vessel that holds your skill information. It governs your ability to use the skill, and can even help pass information into the state as it's entered.
+  - For example, Henry's primary is a `SteppedSkillDef`. This will increment a `step` counter and pass that into the entity state, so you can do combo primaries. 
+- I highly recommend reading into the `SkillDef` class in the game's code, and looking at examples of existing custom `SkillDefs`, for example `HuntressTrackingSkillDef`
+
+#### 1-5. Hitboxes
+Feel free to skip this section if you aren't going to do any melee attacks.
+
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/4e141485-4b12-45ce-9e64-9f080c3b43aa)
+
+- Here's an example of how you can set up a `HitBoxGroup` for your character to use in `OverlapAttacks` (most commonly melee attacks). 
+  - To use this, create an empty gameobject in unity under your character prefab, and add it to your ChildLocator. 
+  - Then use the name of that child here.
+- A HitBox in this game is just a transform, where the game runs `Physics.OverlapBox` using the dimensions of the transform.
+  - These are the cube hitboxes you see if you check out the hitbox viewer.  
+  - You can look at the scene in the henry unity project for an example of what a hitbox looks like.
 
 ## 2. Skins
 
@@ -274,7 +291,7 @@ Not too keen on explaining it all since it's so poorly written but the rest of t
 
 ## 3. Character Master (AI (Vengeance Doppelganger))
 
-All survivors and enemies and other in this game are Characters. 
+All survivors and enemies and others in this game are Characters. 
 - A Character is very modular in RoR2, where a survivor is simply a player-controlled character, and an enemy is simply an ai-controlled character.
 - This is why enemies can have items, why you can spawn as an enemy and use its attacks, and why AI can be applied to survivors.
 
@@ -285,8 +302,16 @@ When you create a character, you should also create a Character Master for it to
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/71cb817f-e6b5-4e9b-8905-73b40539664d)  
 it's as the comments say
 
+## 4. Assets and Effects
+There are a lot of helper functions in the `Modules.Assets` class used to load prefabs from your unity project to use as projectiles or effects. Examples of this are seen in the `HenryAssets` class.
 
-## 4. Item Displays
+As you get more and more experience creating assets for your character, you'll want to experiment with what workflow works best with you. Maybe you like cloning the game's assets and recoloring them. Maybe you like having just visuals set up in unity and putting together the necessary components in code. Maybe you prefer setting it up mostly in unity and just loading them into your mod ready to go. Feel free to ask questions as you go about these.
+#### 4-1. Projectiles
+I will probably be creating a page dedicated to projectiles. stay tuned for that. For now there are plenty of projectiles you can steal from the game. Henry's bomb is actually an example of this :P.
+
+# To Go Further
+
+## 5. Item Displays
 
 Ah yes, who doesn't love 2400 lines of grueling, tedious code, doing nothing but copy pasting blocks and blocks of code and then typing in values.
 
@@ -294,40 +319,39 @@ Thankfully `KingEnderBrine` has made a tool that streamlines this process to an 
 
 [ItemDisplayPlacementHelper](https://thunderstore.io/package/KingEnderBrine/ItemDisplayPlacementHelper/)
 
-The code responsible for setting it up can be found up near your bodyInfo and customRendererInfos:  
-![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Ass/HenryTutorialImages/Step6-1_itemdisplays.png)  
+The code responsible for setting it up can be found back up top near your bodyInfo and customRendererInfos:  
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/7da135ba-faca-4cf1-87f8-88dde837fd51)   
 All of the initialization is handled for you. If you don't want displays yet, simply set that to null.  
+
 Go into the `HenryItemDisplays` class and all the items rules have been written, so all you need to do is install that tool, run the game, press `F2` on the main menu, select your character and start dragging items around.
+
+You'll notice Henry has a bunch of entries on his ChildLocator for his various body parts. These are how item displays attach to your bones. You don't have to create an entry fo revery bone on you rig, just the ones you want to put displays on. There is an `ArrayTransferTool` component in the Unity Project that makes this a little easier.
 
 Seriously, this section would've been a lot longer without that tool.
 
-## 5. Unlockables (wip)
+## 6. Unlockables And Achievements
+I know you're just here for Mastery Unlocks.
 
-I'll elaborate on this more sometime but unlockables are basically just hooking a game event like `onClientGameOverGlobal` for example and checking if you've met the proper conditions for the unlock.
+- `Unlockables`, as named, are the challenges that you can unlock. `Achievements` are the code used to check if you've completed a certain task.   
+- These two things are connected by an `identifier` that you set.
 
-There exists a `GenericModdedUnlockable` class and a `BaseMasteryUnlockable` class you can inherit from to slightly more easily create your unlocks. 
+Creating a mastery achievement has been greatly simplified. All you need to do is plug in your character's name and `RequiredDifficultyCoefficient`
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/706bd249-7f47-4ef2-85f8-56c798547b8b)  
 
-![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Ass/HenryTutorialImages/Step8-1_unlocks.png)  
-*making a mastery achievement literally couldn't be any easier!*
+The `RegisterAchievement` attribute is how you get your achievement in the game. I recommend storing those identifiers in const strings so you can reference them elsewhere:  
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/9822418d-8b20-4c94-863f-703501435851)
 
-There's plenty of examples of this in most of my repos, so I recommend checking those out, namely Enforcer and Miner. One thing to note is that certain things like on kill achievements must be server tracked, otherwise only the host can unlock them. Keep an eye out for some examples on that.
+If you're curious about writing your own achievements, you can take a look at the `BaseMasteryAchievement` there, and any of the vanilla achievements for reference
+One thing to note is that certain things like on kill achievements must be server tracked, otherwise only the host can unlock them. [HAN-D Overclocked has a good example of this](https://github.com/Moffein/HAN-D_OVERCLOCKED/blob/master/HenryMod/Content/HANDSurvivor/Achievements/HANDSurvivorUnlockAchievement.cs), as well as, again, many of the vanilla achievements.
 
-Unlocks are optional I suppose. People like having them, but you don't need them.
+Unlocks are generally optional but people like having them, and it's a good way to get people to experiment mechanics with your character. If they don't there's the CheatUnlock mod so no biggie.
 
 --------------------
 
-That should cover just about everything. If there's anything I'm missing or anything that doesn't make sense feel free to let me know in the modding discord (`thetimesweeper`).
+That should cover just about everything. See [this page(under construction)]() for how to properly build and install your mod.  
+If there's anything I'm missing or anything that doesn't make sense feel free to let me know in the modding discord (`thetimesweeper`).  
+Remember, the discord is there to answer your questions and help you along the journey. There's loads of experience you can call upon there.
+
+Happy modding!
 
 --------------------
-
-## Step 9 - Extra
-
-### Post-Build Event
-It's wonderful to just hit ctrl+b and run the game and your mod is magically there.
-
-In Visual Studio, find your project in the solution explorer, right click > Properties  
-You'll see a screen something like this:  
-
-![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Ass/HenryTutorialImages/Step9-1_extra.png)    
-An example has been set up for you here  
-You can also use a similar copy command in Pre-build events to copy your assetbundle to your project, so you don't have to drag and replace it every time you make a change in unity.
