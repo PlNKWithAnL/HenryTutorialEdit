@@ -311,6 +311,7 @@ I will probably be creating a page dedicated to projectiles. stay tuned for that
 
 # To Go Further
 
+
 ## 5. Item Displays
 
 Ah yes, who doesn't love 2400 lines of grueling, tedious code, doing nothing but copy pasting blocks and blocks of code and then typing in values.
@@ -319,15 +320,40 @@ Thankfully `KingEnderBrine` has made a tool that streamlines this process to an 
 
 [ItemDisplayPlacementHelper](https://thunderstore.io/package/KingEnderBrine/ItemDisplayPlacementHelper/)
 
-The code responsible for setting it up can be found back up top near your bodyInfo and customRendererInfos:  
-![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/7da135ba-faca-4cf1-87f8-88dde837fd51)   
-All of the initialization is handled for you. If you don't want displays yet, simply set that to null.  
-
-Go into the `HenryItemDisplays` class and all the items rules have been written, so all you need to do is install that tool, run the game, press `F2` on the main menu, select your character and start dragging items around.
-
-You'll notice Henry has a bunch of entries on his ChildLocator for his various body parts. These are how item displays attach to your bones. You don't have to create an entry fo revery bone on you rig, just the ones you want to put displays on. There is an `ArrayTransferTool` component in the Unity Project that makes this a little easier.
+Now, all you need to do is install that tool, run the game, press `F2` on the main menu, select your character and start dragging items around.
 
 Seriously, this section would've been a lot longer without that tool.
+
+#### How do
+- The code responsible for setting it up can be found back up top near your bodyInfo and customRendererInfos:  
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/7da135ba-faca-4cf1-87f8-88dde837fd51)   
+All of the initialization is handled in `CharacterBase`. If you don't want displays yet, simply set that to null.  
+
+- Go into the `HenryItemDisplays` class and all the Item Display Rules have been generated.  
+If you want to generate these rules yourself, or the game has updated and you want to generate the remaining rules, see the `Modules.ItemDisplayCheck` class.
+
+
+- Head to the top of the `HenryItemDisplays` class and copy this block here:  
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/fbee5e32-c5b8-4bd2-8d50-ef5e9ac8a3b2)
+
+- In the Item Display Placement Helper mod:
+  - select any character on the top left
+  - select any item display on the middle left
+  - select one of the display prefabs on the right
+  - click this cog:  
+  ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/0381948c-d8c9-4275-8dc4-e728e8199fe1)
+  - paste the block you copied above into the `custom` field
+
+You're good to start setting your item displays!
+
+#### Child Locator
+
+You'll notice Henry has a bunch of entries on his ChildLocator for his various body parts. These are how item displays attach to your bones. 
+- You don't have to create an entry for every bone on your rig, just the ones you want to put displays on. 
+- There is an `ArrayTransferTool` component in the Unity Project that makes this a little easier.
+  - Attach it next to your child locator in editor, drag many objects at once into the `objeys` field, right click and choose "Send to ChildLocator". remove the Array Transfer tool when you're done
+- Even if your bones are named differently, I recommend naming the child locator entries for your main body parts (arms, legs, head, chest) the same as henry's
+  - There are a few spots in the game where some code is looking for these names
 
 ## 6. Unlockables And Achievements
 I know you're just here for Mastery Unlocks.
