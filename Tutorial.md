@@ -185,7 +185,7 @@ public override CustomRendererInfo[] customRendererInfos => new CustomRendererIn
 ### You're done kinda!
 
 With all that taken care of, you should now have a working character that can be selected and played with ingame! If you run into any issues at this point be sure to go back through and make sure you've followed every step properly.  
-Follow the [Building the Mod(under construction)](https://github.com/ArcPh1r3/HenryTutorial/wiki/Building-the-Mod) page to make sure you structure your mod install properly.
+Follow the [Building the Mod](https://github.com/ArcPh1r3/HenryTutorial/wiki/Building-the-Mod) page to make sure you structure your mod install properly.
 
 # Developing your Character
 Now that setup part of the character is done there's a few more things to do to truly complete your survivor. These are aspects that have been streamlined with this template, but are ultimately up to you to figure out how you go about!
@@ -213,17 +213,20 @@ The code here is self explanatory or commented, this is where all the magic happ
 First and foremost, your character needs `EntityStateMachines`:
 
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/86b6d745-cff8-4e2a-a9fb-c37b98f0654d)
-- A State Machine, as it sounds, is what governs the state your character is in. In ror2 you can have multiple state machines so that multiple states can happen at the same time, within your control.
+- A State Machine, as it sounds, is what governs the state your character is in. In ror2 you can have multiple state machines so that multiple `EntityStates` can happen at the same time, within your control.
 - When you create skills, you will assign them to these state machines.
-- The "Body" state machine typically has `GenericCharacterMain` as its main state. You can take a look at that class in the game's code to see why.
+- The "Body" state machine typically has `GenericCharacterMain` as its main state. It handles your character's movement and ability casting, you can check it out in the game's code to see more.
   - You can also create your own `EpicCharacterMain` class that inherits from it, to add your own functionality to the character as it is in its main state.
 
 #### 1-2. Skills
-- Your character's `skill`s are `def`ined in what's called a `SkillDef`. Mind blowing I know.
-- The action that you take when you execute a skill is called an `EntityState` while the `SkillDef` governs the icon and cooldown and all that good stuff on the bottom of your screen.
-- While the `SkillDef` holds the information, on your character are `GenericSkill` components that hold your currently selected `SkillDef`
+A brief overview:
+- The action that you take when you execute a skill is called an `EntityState`. 
+- The information about the skill is held in what's called a `SkillDef`, which includes what `EntityState` to enter. It governs the icon and cooldown and all that good stuff on the bottom of your screen.
+- On your character are `GenericSkill` components that hold your currently selected `SkillDef`
 - You then have a `SkillLocator` component which holds a reference to your respective `GenericSkill` components for Primary, Secondary, Utility, and Special, so your main state can call on them and perform your skills.
 - Sounds like a lot, but tl;dr: `SkillLocator` => `GenericSkill` => `SkillDef` => `EntityState` => ??? => Profit
+
+You can get familiar with this as you go. Henry streamlines the setup of all these moving parts for you. 
 
 `InitializeSkills` method contains all the code for setting up your character's `SkillDefs`. It should be fairly self-explanatory and easy to work with.
 
@@ -235,12 +238,15 @@ The `CreateSkillFamilies` will create `GenericSkills` on your bodyPrefab for you
 So this is about as simple as it can get. Using `Skills.CreateSkillDef` you create the `SkillDef` for your skill and fill in all the values with what you need.
 - `skillName` is the internal name of the skill used by saving/loading profiles
 - `keywordTokens` are the keywords that pop up when you hover over the skill in the character select screen
-- `activationState` is the `EntityState` you're entering when you use the skill
-- `activationStateMachineName` is a bit complicated, simply put you want `Weapon` if it's a skill that allows you to move while using it and `Body` if you don't want that
+- `activationState` is the `EntityState` you're entering when you use this skill. 
+- `activationStateMachineName` is the `EntityStateMachine` that runs your skill, as we've explained above.
+  - set to "Body" and it'll overwrite your character's main state. a.k.a. you can't move while doing it.
+  - set to "Weapon" and you can freely use it while moving
+  - in general, set to any state machine, so other skills can be casted in the other state machines without interrupting
 - `interruptPriority` will be explained down below
 - `baseRechargeInterval` is the skill cooldown
 - `baseMaxStock` is the stock you start with
-- `rechargeStock` is how many stocks you regain after every cooldown. usually for "ammo" type skills like visions of heresy
+- `rechargeStock` is how many stocks you regain after every cooldown. Usually for "ammo" type skills like visions of heresy
 - `requiredStock` is how many stocks are required to use the skill. Usually set to 0 for primary attacks, or other unique kind of skills
 - `stockToConsume` is how many stocks this skill loses on use. Usually set to 0 for fancy skills that will deduct the cooldown in different ways. 
 - `resetCooldownTimerOnUse` usually used for "ammo" type skills like visions of heresy.
@@ -374,7 +380,7 @@ Unlocks are generally optional but people like having them, and it's a good way 
 
 --------------------
 
-That should cover just about everything. See [this page(under construction)](https://github.com/ArcPh1r3/HenryTutorial/wiki/Building-the-Mod) for how to properly build and install your mod.  
+That should cover just about everything. See [this page](https://github.com/ArcPh1r3/HenryTutorial/wiki/Building-the-Mod) for how to properly build and install your mod.  
 If there's anything I'm missing or anything that doesn't make sense feel free to let me (`thetimesweeper`) know in the modding discord.  
 Remember, the discord is there to answer your questions and help you along the journey. There's loads of experience you can call upon there.
 
