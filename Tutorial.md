@@ -18,7 +18,7 @@ The software generally used to create and animate models is [Blender](https://ww
 When creating a character model:
 - it's important to note that you're limited to having one material per mesh. 
   - There is, however, no limit to the amount of meshes you can have on your model.
-- See the [Survivor Model Tips(under construction)]() page for more info on how we've learned to make survivors over the years.
+- See the [Survivor Model Tips](https://github.com/ArcPh1r3/HenryTutorial/wiki/Survivor-Model-Tips) page for more info on how we've learned to make survivors over the years.
  
 When exporting your character model from blender into Unity, it's important to fix a scaling issue that can happen if your export settings aren't set correctly.  
 Here are the recommended FBX export settings:  
