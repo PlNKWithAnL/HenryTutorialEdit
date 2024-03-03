@@ -76,6 +76,9 @@ no one does this lol, but if you do I'll be very impressed
 
 #### Notes
 - In your Run and Sprint animations, set animation events for Footstep, with the string parameter of the foot that's hitting the ground
+- You'll want your run FLRB animations to all have same cadence for each foot. 
+  - All animations start with the right foot, for example. 
+  - All animations have the foot touch and leave the ground at the same frames.
 - RUN NOT WALK
   - At the speed you go in this game, characters default to a brisk jog for basic movement.
   - If you animate your character walking, you'll end up with the skiing issue where their feet won't line up to the ground below, or you'll have to speed up the animation to match the feet on the ground, which will be too unnaturally fast
@@ -98,7 +101,7 @@ For Item Displays to hide certain parts of your body (e.g. goat hoof), set up ve
 From the discord:  
 - Limb mask uses prime numbers on the model vertex colours red channel.  
 - Valid colours (0-255 range) are 2 (Head), 3 (RightArm), 5 (LeftArm), 11 (RightCalf), 17 (LeftLeg)  
-<img width="500" src="https://cdn.discordapp.com/attachments/562704639569428506/881273934610305054/unknown.png?ex=65e38bcf&is=65d116cf&hm=c5582685a4a3edb6ec91707b7375be0901b0662cb176c1f2fda5bfe376fcd5ac&"/>
+<img width="500" src="https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/65ac2f92-83a0-49dc-bd81-494ef15fa398"/>
 
 - *currently only head (ego), rightcalf (goat hoof), and right arm (capacitor) are used*  
 - The model material should use `Hopoo Games/Deferred/Standard` shader and have `Enable Limb Removal` selected.  
