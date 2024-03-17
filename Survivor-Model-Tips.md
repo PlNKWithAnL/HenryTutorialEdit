@@ -68,11 +68,12 @@ here's the list of animations characters usually do
 
 #### Extras
 no one does this lol, but if you do I'll be very impressed
+- Additive Air strafes, Left-Right, Back-Front, similar to aimpitch/yaw
 - custom behavior for extra polish
   - rest idle animation after standing still for a while
   - anything else you can think of
 - emotes
-  - yes emoteapi exists and I always recommend supporting it cuase it's fun, but adding your own emotes is soul
+  - yes emoteapi exists and I always recommend supporting it cause it's fun, but adding your own emotes is soul
 
 #### Notes
 - In your Run and Sprint animations, set animation events for Footstep, with the string parameter of the foot that's hitting the ground
