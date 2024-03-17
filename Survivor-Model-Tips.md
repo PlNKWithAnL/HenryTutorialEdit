@@ -84,7 +84,7 @@ no one does this lol, but if you do I'll be very impressed
   - At the speed you go in this game, characters default to a brisk jog for basic movement.
   - If you animate your character walking, you'll end up with the skiing issue where their feet won't line up to the ground below, or you'll have to speed up the animation to match the feet on the ground, which will be too unnaturally fast
 - You'll usually mask your attack animations in a "Gesture, Override" layer to only happen to the upper body, so feet can run around while moving
-  - If you've hired domi and she gave you a really fuckin sweet full body swing animation or so, you can play this as a "FullBody, Override" animation while standing still, as well as your "Gesture, Override" animation
+  - If you've hired a certain really good animator and they gave you a really fuckin sweet full body swing animation or so, you can play this as a "FullBody, Override" animation while standing still, as well as your "Gesture, Override" animation
   - have a transition in your animator to BufferEmpty that will activate when isMoving is true, so the full body can end early and let your feet move, but the upper body will continue the animation  
 ```csharp
 base.PlayAnimation("Gesture, Override", "SwingL", "Swing.playbackRate", this.duration);
