@@ -68,8 +68,8 @@ here's the list of animations characters usually do
 
 #### Extras
 no one does this lol, but if you do I'll be very impressed
-- Additive Air strafes, Left-Right, Back-Front, similar to aimpitch/yaw
 - custom behavior for extra polish
+  - Additive Air strafes (see below)
   - rest idle animation after standing still for a while
   - anything else you can think of
 - emotes
@@ -95,6 +95,16 @@ if (base.isGrounded & !base.GetModelAnimator().GetBool("isMoving"))
 ```
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/6696a55d-f15f-4fcd-9b7f-ade92ddc1004)  
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/ec6bb926-9418-4065-9388-51635f193278)
+- Additive Air strafes: character leaning in the direction they're jumping/falling
+  - Have a Neutral pose (a frame from your ascend or descend), at least two frames  
+  - Have Front, Left, Right, Back leaning poses
+    - these animations need to have a dummy frame at the very beginning which is the Neutral pose, and at least two frames immediately after with the pose you want for that lean
+    - in Unity, make the animation Start at frame 1, so the Neutral pose is not clipped in the animation
+    - hit Additive Reference Pose and set it to 0   
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/59bfe550-bcec-47ea-b7b0-7ece7bb21a75)
+  - put them together in a new blend tree, set up just like the one for Run
+  - put them in a new layer, marked additive, with a transition going to/from it based on isGrounded parameter  
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/e69c54ef-fe59-43ad-aa23-e1c3c07babe4)
 
 ## Limb Masking
 For Item Displays to hide certain parts of your body (e.g. goat hoof), set up vertex colors on your model.
