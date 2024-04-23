@@ -199,7 +199,7 @@ Past the `CharacterBody` setup and `CharacterModel` setup from earlier, there ar
   - With this, if you have multiple characters, you can have separate assetbundles for each.
 - The fields following are all set in character initialization. They are exposed here for you to use as you further build up your character if you need (mainly the bodyPrefab)
 - `CharacterBase` is a singleton. Not shown here is an `instance` field that will allow you to access information from this class from anywhere else (mainly to use the assetBundle).
-  - for exampe `HenrySurvivor.instance.assetBundle.LoadAsset<Sprite>("someIcon")`
+  - for example `HenrySurvivor.instance.assetBundle.LoadAsset<Sprite>("someIcon")`
 
 Initialization:
 
@@ -230,20 +230,22 @@ You can get familiar with this as you go. Henry streamlines the setup of all the
 
 `InitializeSkills` method contains all the code for setting up your character's `SkillDefs`. It should be fairly self-explanatory and easy to work with.
 
-![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/14ba5825-01e3-4f25-aa13-f23547ace368)  
-The `CreateSkillFamilies` will create `GenericSkills` on your bodyPrefab for your four skill slots, and create `SkillFamilies` for them. As you can guess, `SkillFamilies` are what hold your Skill `Variants` that you can select in loadout.
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/8d2b6463-df0f-4507-a809-fe3b4d9acef4)  
+Similar to the `EntityStateMachines`, we'll clear the `GenericSkills` off the Commando prefab we cloned. Within their respective functions, we'll be creating and adding `GenericSkills` on the bodyPrefab for the four skill slots, and create `SkillFamilies` for them.  
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/3232836e-b96d-44c9-88cd-4e3881f310e0)  
+As you can guess, `SkillFamilies` are what hold your Skill `Variants` that you can select in loadout. At the end of each function, we'll add our skills to this family.
 
-![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/579fc1f3-03d8-48e3-84a8-f88a82eafe62)
-
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/579fc1f3-03d8-48e3-84a8-f88a82eafe62)  
 So this is about as simple as it can get. Using `Skills.CreateSkillDef` you create the `SkillDef` for your skill and fill in all the values with what you need.
 - `skillName` is the internal name of the skill used by saving/loading profiles
+- `skillNameToken` and `skillDescriptionToken` are the self-explanatory language tokens.
 - `keywordTokens` are the keywords that pop up when you hover over the skill in the character select screen
 - `activationState` is the `EntityState` you're entering when you use this skill. 
-- `activationStateMachineName` is the `EntityStateMachine` that runs your skill, as we've explained above.
+- `activationStateMachineName` is the `EntityStateMachine` that runs your skill, as explained above.
   - set to "Body" and it'll overwrite your character's main state. a.k.a. you can't move while doing it.
   - set to "Weapon" and you can freely use it while moving
   - in general, set to any state machine, so other skills can be casted in the other state machines without interrupting
-- `interruptPriority` will be explained down below
+- `interruptPriority` the priority with which this skill will interrupt other skills. 
 - `baseRechargeInterval` is the skill cooldown
 - `baseMaxStock` is the stock you start with
 - `rechargeStock` is how many stocks you regain after every cooldown. Usually for "ammo" type skills like visions of heresy
@@ -261,6 +263,8 @@ So this is about as simple as it can get. Using `Skills.CreateSkillDef` you crea
 
 So once you've created your `SkillDef`, `Skills.AddPrimarySkill()`, `Skills.AddSecondarySkill()`, etc, will add it to the character pain free. You can add as many skills as you want with this method.
 
+Take a peek at the AddPassiveSkill for more information on that if you need it. It will also cover adding additional arbitrary `GenericSkills` like Mul-T's second primary or Captain's beacons. 
+
 #### 1-3. EntityStates
 - Go nuts.
 - Some states have been included as examples, but there's also an entire library of skills in the base game and other mods to look to for reference.
@@ -274,7 +278,7 @@ So once you've created your `SkillDef`, `Skills.AddPrimarySkill()`, `Skills.AddS
 #### 1-5. Hitboxes
 Feel free to skip this section if you aren't going to do any melee attacks.
 
-![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/4e141485-4b12-45ce-9e64-9f080c3b43aa)
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/46421cc2-7dad-42b2-b607-bf21f96cb1b3)
 
 - Here's an example of how you can set up a `HitBoxGroup` for your character to use in `OverlapAttacks` (most commonly melee attacks). 
   - To use this, create an empty gameobject in unity under your character prefab, and add it to your ChildLocator. 
