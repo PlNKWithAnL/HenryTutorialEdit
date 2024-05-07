@@ -56,7 +56,7 @@ here's the list of animations characters usually do
 
 #### Additional/Polish/Legitness
 - Aim pitch, yaw
-  - set Additive Reference Pose in the import settings
+  - set Additive Reference Pose in the import settings (see below)
 - idle in (suddenly stop running -> idle)
 - jump up (not the actual jump because jumping is instant. The aftermath of jumping)
 - landing impact (additive)
@@ -83,6 +83,8 @@ no one does this lol, but if you do I'll be very impressed
 - RUN NOT WALK
   - At the speed you go in this game, characters default to a brisk jog for basic movement.
   - If you animate your character walking, you'll end up with the skiing issue where their feet won't line up to the ground below, or you'll have to speed up the animation to match the feet on the ground, which will be too unnaturally fast
+- Set Additive Reference Pose in the import settings  
+![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/43706808-bf4e-4065-a766-bc549270ffd5)
 - You'll usually mask your attack animations in a "Gesture, Override" layer to only happen to the upper body, so feet can run around while moving
   - If you've hired a certain really good animator and they gave you a really fuckin sweet full body swing animation or so, you can play this as a "FullBody, Override" animation while standing still, as well as your "Gesture, Override" animation
   - have a transition in your animator to BufferEmpty that will activate when isMoving is true, so the full body can end early and let your feet move, but the upper body will continue the animation  
