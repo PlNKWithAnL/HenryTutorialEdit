@@ -15,10 +15,11 @@ Take a gander at how we make this possible in the HenryTutorial\Build folder:
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/c2384457-2249-4179-b63c-2cc4e626c01b)
 
 - Open up the manifest.json and change the "name" and "author" fields as you see fit. 
-- Now zip this file and the plugins folder and you can import this into r2modman using settings > profile > import local mod. 
-- This mimics how r2modman will download and instal your mod from thunderstore when you upload it
+- Now select these two items and zip them. the manifest.json and plugins folder need to be in the root of the zip
+- you can then import this into r2modman using settings > profile > import local mod. 
+- This mimics how r2modman will download and install your mod from thunderstore when you upload it
 
-Of course, when you go to release your mod, as you (should) know, you'll need to add an `icon.png` and `readme.md`.
+Of course, when you go to release your mod, as you (probably) know, you'll need to add an `icon.png` and `readme.md`.
 
 ## Using a Post Build
 When you build a mod, you can set your visual studio .csproj to automatically run some commands after you build. We can use this to automatically copy our built mod into your r2modman profile folder, so you can run the game with your mod
