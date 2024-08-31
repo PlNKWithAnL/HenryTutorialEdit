@@ -370,12 +370,14 @@ I know you're just here for Mastery Unlocks.
 - These two things are connected by an `identifier` that you set.
 
 Creating a mastery achievement has been greatly simplified. All you need to do is plug in your character's name and `RequiredDifficultyCoefficient`
-![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/706bd249-7f47-4ef2-85f8-56c798547b8b)  
+![image](https://github.com/user-attachments/assets/66a34747-79b0-4d52-b8f0-8e11d0465fbd)
 
 The `RegisterAchievement` attribute is how you get your achievement in the game. I recommend storing those identifiers in const strings so you can reference them elsewhere:  
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/9822418d-8b20-4c94-863f-703501435851)
 
-If you're curious about writing your own achievements, you can take a look at the `BaseMasteryAchievement` there, and any of the vanilla achievements for reference
+Achievements also have a field for lunar coin rewards. From a quick look, mastery achievements grant 10, skill achievements grant 3 or 5. take a look through the game's existing achievements for more examples.
+
+If you're curious about writing your own achievements, you can take a look at the code for `BaseMasteryAchievement` there, and any of the vanilla achievements for reference
 One thing to note is that certain things like on kill achievements must be server tracked, otherwise only the host can unlock them. [HAN-D Overclocked has a good example of this](https://github.com/Moffein/HAN-D_OVERCLOCKED/blob/master/HenryMod/Content/HANDSurvivor/Achievements/HANDSurvivorUnlockAchievement.cs), as well as, again, many of the vanilla achievements.
 
 Unlocks are generally optional but people like having them, and it's a good way to get people to experiment mechanics with your character. If they don't there's the CheatUnlock mod so no biggie.
