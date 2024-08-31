@@ -1,3 +1,6 @@
+# No longer maintained
+This tutorial is no longer used, and since Seekers of the Storm, will likely not work. I am keeping it here for possibly needing to reference things or something like that. Use the updated Tutorial, it's much better anyways.
+
 # Overview
 This tutorial will go over custom character creation for Risk of Rain 2. It assumes a basic understanding of Unity and C# at the very least. If you don't have that and get stuck, look up tutorials! I can't teach you everything here.
 
