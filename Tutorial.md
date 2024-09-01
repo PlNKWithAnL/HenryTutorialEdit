@@ -27,7 +27,7 @@ The important things to note are to set `Apply Scalings` to `FBX All`, and turn 
 
 ## Setting up your character prefab in Unity
 
-You're gonna want Unity version 2019.4.26f1, the one Risk of Rain 2 currently uses. Download [here](https://unity3d.com/get-unity/download/archive)
+You're gonna want Unity version 2021.3.33f1, the one Risk of Rain 2 currently uses. Download [here](https://unity3d.com/get-unity/download/archive)
 
 Once you have this, if you haven't already, grab Henry's Unity project from the repo. This is recommended over creating a new one so that you can use Henry as a reference as well as add several scripts I've included to make things easier.
 
