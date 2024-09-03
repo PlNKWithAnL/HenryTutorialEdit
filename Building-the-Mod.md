@@ -18,6 +18,8 @@ Take a gander at how we make this possible in the HenryTutorial\Build folder:
 - Now select these two items and zip them. the manifest.json and plugins folder need to be in the root of the zip
 - you can then import this into r2modman using settings > profile > import local mod. 
 - This mimics how r2modman will download and install your mod from thunderstore when you upload it
+- Now your mod should show up in R2Modman, however unlike downloading a mod online, r2modman won't automatically download all the dependencies. 
+  - Make sure you have those installed as well. They are the ones listed in the manifest.json file
 
 Of course, when you go to release your mod, as you (probably) know, you'll need to add an `icon.png` and `readme.md`.
 
