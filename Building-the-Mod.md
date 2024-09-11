@@ -5,7 +5,7 @@ Simple times for simple men. We're big brain now.
 ## Folder Structure
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/14e6461f-e0fa-4dfd-a9bf-79e1983c61cc)
 
-Here's the folder structure that's needed from your mod as it should be installed in your r2modman profile.  
+Here's the folder structure of the final mod installation in your r2modman profile.  
 - The henry template will load your assetbundle from a folder next to your .dll named "AssetBundles".
 - If you're doing language files (see the [Generating Language files(under construction)]() page for details), you'll need a folder next to your .dll named "Languages".
 - Soundbanks aren't required to be in a folder, so long as they are named with the .sound extension R2API will load them, but it's just nice for organization.
@@ -22,6 +22,8 @@ Take a gander at how we make this possible in the HenryTutorial\Build folder:
   - Make sure you have those installed as well. They are the ones listed in the manifest.json file
 
 Of course, when you go to release your mod, as you (probably) know, you'll need to add an `icon.png` and `readme.md`.
+
+Final warning not to upload a mod with the default henry assetbundle, as this will cause conflicts. Follow the tutorial to make sure your assetbundle has been rebuilt from unity with a different tag, or we will thanos snap your thunderstore upload
 
 ## Using a Post Build
 When you build a mod, you can set your visual studio .csproj to automatically run some commands after you build. We can use this to automatically copy our built mod into your r2modman profile folder, so you can run the game with your mod
