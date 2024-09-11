@@ -23,7 +23,8 @@ Take a gander at how we make this possible in the HenryTutorial\Build folder:
 
 Of course, when you go to release your mod, as you (probably) know, you'll need to add an `icon.png` and `readme.md`.
 
-Final warning not to upload a mod with the default henry assetbundle, as this will cause conflicts. Follow the tutorial to make sure your assetbundle has been rebuilt from unity with a different tag, or we will thanos snap your thunderstore upload
+### Final warning about conflicts
+Do not to upload a mod with the default henry assetbundle, as this will cause conflicts. Simply renaming the file will not suffice. Follow the tutorial to make sure your assetbundle has been rebuilt from unity with a different tag, or we will thanos snap your thunderstore upload
 
 ## Using a Post Build
 When you build a mod, you can set your visual studio .csproj to automatically run some commands after you build. We can use this to automatically copy our built mod into your r2modman profile folder, so you can run the game with your mod
