@@ -98,7 +98,7 @@ if (base.isGrounded & !base.GetModelAnimator().GetBool("isMoving"))
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/6696a55d-f15f-4fcd-9b7f-ade92ddc1004)  
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/ec6bb926-9418-4065-9388-51635f193278)
 - Additive Air strafes: character leaning in the direction they're jumping/falling
-  - Have a Neutral pose (a frame from your ascend or descend), at least two frames  
+  - Have a Neutral pose (a frame from your ascend or descend). This animation has to be at least two frames  
   - Have Front, Left, Right, Back leaning poses
     - these animations need to have a dummy frame at the very beginning which is the Neutral pose, and at least two frames immediately after with the pose you want for that lean
     - in Unity, make the animation Start at frame 1, so the Neutral pose is not clipped in the animation
