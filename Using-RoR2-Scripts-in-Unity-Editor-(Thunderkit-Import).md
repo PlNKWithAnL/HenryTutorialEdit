@@ -12,7 +12,7 @@ With all that said, we can take advantage of one part of Thunderkit: Importing t
 With this, we can attach game components to our game objects and use them the way components were intended to be used: in the Unity editor. Projectiles are very component based, and were likely the reason you were linked to this article. Setting those up entirely through code is tedious to the point of limiting.
 
 ## Hold on, don't we already do this?
-The unity-familiar among you might notice that we are already using RoR2 components in the Henry setup. The prefab in our unity project has the `ChilLocator` and `RagdollController` components attached.  
+The unity-familiar among you might notice that we are already using RoR2 components in the Henry setup. The prefab in our unity project has the `ChildLocator` and `RagdollController` components attached.  
 This was done by having dummy scripts in the unity project with the same names as the components from the game. When serialized, RoR2 will recognize these components as their own, and we're able to take advantage of assigning things in editor.
 
 This works fine, but doesn't scale. We would have to do this for *every* script we want to attach in editor. The reason we are here is to import the whole library of game code into the project, and we will have access to *all* the game's components. 
