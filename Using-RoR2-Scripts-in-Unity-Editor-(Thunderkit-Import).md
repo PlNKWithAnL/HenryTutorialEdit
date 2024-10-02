@@ -73,7 +73,7 @@ The helper scripts are very useful and we will add them back after.
 |Create Game Package | On |  |
 |Import Addressable Catalog | On | addressable browser is dope |
 |Configure Addressable Graphics Settings | On |  |
-|Ensure RoR2 Thunderstore Source | Off | unneeded |
+|Ensure RoR2 Thunderstore Source | Off | not needed|
 |Install BepInEx| Off | not needed, but if you want to use simplyaddress or something that depends on it, you can turn this on. |
 |R2API Submodule Installer | Off | ah yes who wouldn't want 28 packages slowing down compiling, playing, and building? |
 |Install RoR2 Compatible Unity Multiplayer HLAPI | Off | we're not weaving in editor so we don't need this |
@@ -87,7 +87,7 @@ The helper scripts are very useful and we will add them back after.
 you're well on your way! with this you will become very powerful
 
 ## Step 4: After Import
-Now, provided you had a working character model prefab, take a look and you will see the scripts are missing.
+Now, if you already had a character started, take a look at your prefab and you will see the scripts are missing.
 1. On the top toolbar, go to Window > Package Manager again
 1. On the top left of the package manager, click the `+` and hit `Add package from git URL` again
 1. Input this URL to install HenryEditorTools: https://github.com/TheTimeSweeper/HenryEditorTools.git
