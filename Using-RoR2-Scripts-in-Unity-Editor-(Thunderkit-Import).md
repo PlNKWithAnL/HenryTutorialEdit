@@ -3,7 +3,7 @@ I will come back and make this a little bit more digestible later. For now, the 
 # Introduction
 Some background before we begin to let you understand what's going on. Feel free to skip to below for the actual steps
 
-For those uninitiated about Thunderkit, you can head to the [disorganized mess of thunderkit articles](https://risk-of-thunder.github.io/R2Wiki/Mod-Creation/Thunderkit/Getting-Started/) on the modding wiki but I will summarize here.  
+For those uninitiated about Thunderkit, you can head to the [now cleaned up Thunderkit guides](https://risk-of-thunder.github.io/R2Wiki/Mod-Creation/Unity-Editor-Usage/ThunderKit/Crash-Course-and-Getting-Started/) on the modding wiki, but I will summarize here:  
 Thunderkit is primarily used to work with the game's code and your mod's code all in your unity project, and build the mod from there. This is different from the Henry setup, which is based on the ordinary way of writing a mod. In the Henry setup, most of the character setup is done in code (typically Visual Studio), and we just use the Unity Editor to build our assets that we then load with our code mod.
 
 With all that said, we can take advantage of one part of Thunderkit: Importing the game code into our unity project to use with our assetbundles. 
