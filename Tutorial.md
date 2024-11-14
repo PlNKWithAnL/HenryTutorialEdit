@@ -42,7 +42,9 @@ Once that's done, follow these steps:
   7. Drag your `GameObject` into the `Project` window to create a new prefab. when prompted, make a `Prefab Variant`. Make sure the name of this prefab in the project window is "mdlYourCharacterName" as before.
   8. Duplicate the object in the scene. Drag that object into the `Project` window to create another prefab, and when prompted, make another `Prefab Variant`. Then change the name of this to "YourCharacterNameDisplay". Remember the name you set here as well.  
       - This will be your display prefab used in the lobby. Here we usually the replace `Animator` to a new one that just plays the lobby animation. 
-  9. Once this is all done, open the AssetBundle Browser and create a new AssetBundle (If you don't have the AssetBundle Browser window, go to Windows > Packages and there you can install it). Drag whatever assets you're using into there and build it. I like to have everything I need in a single folder and just drag that to keep things simple.
+  9. Once this is all done, open the AssetBundle Browser and create a new AssetBundle
+     - If you don't have the AssetBundle Browser window, go to Window > Package Manager > click the + on the top left > Add package from git URL... and paste [this URL](https://github.com/Unity-Technologies/AssetBundles-Browser.git) (make sure it ends in .git)
+     - Drag whatever assets you're using into there and build it. I like to have everything I need in a single folder and just drag that to keep things simple.
  10. If this was done right, you should be able to navigate to where you built the AssetBundle and see a game ready bundle. 
      - If you've cloned the HenryTutorial repo, I recommend to navigate to `Build\plugins\AssetBundles` and put your new assetbundle into this folder, replacing the `myassetbundle` file that you see there.
         - If you're skipping the character model process and just want to build with henry, you must at least rename `myassetbundle` to something else.
