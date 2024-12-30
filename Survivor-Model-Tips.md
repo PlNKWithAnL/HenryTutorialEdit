@@ -21,10 +21,11 @@ This is information overload, and is not required for the tutorial. I recommend 
 
 ## Ragdoll
 Ragdolls are pretty easy with The Bone Script. 
-- add transforms from your hierarchy to the ragdollcontroller (you don't have to add every single bone. just main body parts)
-  - right click and hit "make bones on the bones". this will generate colliders and rigidbodies needed
-- if you want things to detach when ragdolling, remove the `CharacterJoint` component and just keep the collider and ragdoll
-- make sure you remove the `CharacterJoint` from your base-most bone. 
+1. add transforms from your hierarchy to the ragdollcontroller (you don't have to add every single bone. just main body parts)
+2. Right click on the ragdollcontroller component and hit "make bones on the bones". this will generate colliders and rigidbodies needed
+- If you don't have the EditorAddRagdoll.cs script in your project, see here: https://github.com/TheTimeSweeper/HenryEditorTools.git 
+- If you want things to detach when ragdolling, remove the `CharacterJoint` component and just keep the collider and ragdoll
+- Make sure you remove the `CharacterJoint` from your base-most bone. 
   - I usually make this the stomach bone (so remove the `CharacterJoint`), then have the `CharacterJoint` in the pelvis bone's `ConnectedBody` field set to the stomach bone.
 
 # Model Stuff
