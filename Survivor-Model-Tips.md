@@ -1,6 +1,3 @@
-# (under construction)
-I'll pretty this page up later, possibly much later, but I'll just dump things here for posterity for people to ask for further info or figure out
-
 # Preface
 This is information overload, and is not required for the tutorial. I recommend coming back to this when you're more comfortable with character creation and are basically ready to take your character to the next level. 
 
