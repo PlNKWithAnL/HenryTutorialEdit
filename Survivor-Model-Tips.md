@@ -126,38 +126,15 @@ From the discord:
   <img width="267" height="217" alt="image" src="https://github.com/user-attachments/assets/6d4f394a-71bc-4f6c-ae07-1207cff052e9" />
 - Next to the dropdown, select Vertex Selection, and select the paintbrush tool, so that the color is available to you  
   <img width="639" height="463" alt="image" src="https://github.com/user-attachments/assets/30c84c98-6450-464b-be58-b7069210f05d" />
-- Click to change the color we're going to paint. What we're going to do is set the **hex color value**. I will explain what value to use in the next section  
+- Click to change the color we're going to paint. What we're going to do is set the **hex color value**.
   <img width="252" height="326" alt="image" src="https://github.com/user-attachments/assets/39a9b490-d695-41b4-a571-762e37d34911" />
+  - 020000 (Head), 030000 (RightArm), 050000 (LeftArm), 0B0000 (RightCalf), 110000 (LeftLeg)
 - Click the Paint menu, and hit Set Vertex Colors to apply the colors  
   <img width="370" height="241" alt="image" src="https://github.com/user-attachments/assets/0f8e8449-5e53-4e51-8b34-83ee0a82c86f" />
+- If this doesn't work you may have to do this: 
+  <img width="1042" height="961" alt="image" src="https://github.com/user-attachments/assets/6fd322e6-e408-43cd-8687-d1a3c61d40a7" />
+  - edit > project settings > playser > other settings > optimization > optimize mesh data > turn that off
 
-### Hex Color Value
-**tl;dr:** 020000 (Head), 030000 (RightArm), 050000 (LeftArm), 0B0000 (RightCalf), 110000 (LeftLeg)
-
-You may be familiar with other softwares and websites treating colors from ranges of 0 - 255. The #FFFFFF color codes are hexadecimal representations of this. first two digits are RR then GG then BB.  
-So a color code of #000000 is black, i.e. 00 for Red, 00 for Green, 00 for Blue. A color code of ##00FF00 is full Green. 00 for Red, FF for Green, and 00 for Blue.
-
-But wait, why FF? why not 99?
-
-#### Hexadecimal is a number system that computers like.
-We as humans count from 1 to 9 then go to 10, this is called Decimal.  Hexadecimal doesn't stop at 9. it goes 1 to 9, A, B, C, D, E, F, then 10.  
-This means that every 10 place in Hexadecimal is equivalent to 16 for us.
-
-so a color value of #030E12 has
-- 03 for red
-- 0E for green, so count 9, a, b, c, d, e to get 14
-- 12 for blue, so 10 + 2. 10 in hex is 16 for us, then add 2 more to get 18
-
-did that make sense? maybe? if you're still curious, you can search "hexadecimal color codes" and find someone way better at explaining it than I am
-
-#### So what does this have to do with goat hoof item display
-In RoR2, the limb masking system just reads the vertex color of the model, and takes the red value. if it is equal to certain values, it hides that part of the model.
-- Valid colours (0-255 range) are 2 (Head), 3 (RightArm), 5 (LeftArm), 11 (RightCalf), 17 (LeftLeg)
-- This translate in hexadecimal to 02 (Head), 03 (RightArm), 05 (LeftArm), 0B (RightCalf), 11 (LeftLeg)
-
-The rest of the color can be anything, so we can just set it to 0000
-
-Now if gbx adds any other limb mask sections. you'll be able to deduce what hexadecimal number this is. (but i'll probably just update this page anyways lol)
 
 
 
