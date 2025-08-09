@@ -132,9 +132,32 @@ From the discord:
   <img width="370" height="241" alt="image" src="https://github.com/user-attachments/assets/0f8e8449-5e53-4e51-8b34-83ee0a82c86f" />
 
 ### Hex Color Value
-tl;dr 020000 (Head), 030000 (RightArm), 050000 (LeftArm), 0B0000 (RightCalf), 110000 (LeftLeg)
+**tl;dr:** 020000 (Head), 030000 (RightArm), 050000 (LeftArm), 0B0000 (RightCalf), 110000 (LeftLeg)
 
-if you've ever wondered what the #FFFFFF color codes are, colors use hexadecimal values
+You may be familiar with other softwares and websites treating colors from ranges of 0 - 255. The #FFFFFF color codes are hexadecimal representations of this. first two digits are RR then GG then BB.  
+So a color code of #000000 is black, i.e. 00 for Red, 00 for Green, 00 for Blue. A color code of ##00FF00 is full Green. 00 for Red, FF for Green, and 00 for Blue.
+
+But wait, why FF? why not 99?
+
+#### Hexadecimal is a number system that computers like.
+We as humans count from 1 to 9 then go to 10, this is called Decimal.  Hexadecimal doesn't stop at 9. it goes 1 to 9, A, B, C, D, E, F, then 10.  
+This means that every 10 place in Hexadecimal is equivalent to 16 for us.
+
+so a color value of #030E12 has
+- 03 for red
+- 0E for green, so count 9, a, b, c, d, e to get 14
+- 12 for blue, so 10 + 2. 10 in hex is 16 for us, then add 2 more to get 18
+
+did that make sense? maybe? if you're still curious, you can search "hexadecimal color codes" and find someone way better at explaining it than I am
+
+#### So what does this have to do with goat hoof item display
+In RoR2, the limb masking system just reads the vertex color of the model, and takes the red value. if it is equal to certain values, it hides that part of the model.
+- Valid colours (0-255 range) are 2 (Head), 3 (RightArm), 5 (LeftArm), 11 (RightCalf), 17 (LeftLeg)
+- This translate in hexadecimal to 02 (Head), 03 (RightArm), 05 (LeftArm), 0B (RightCalf), 11 (LeftLeg)
+
+The rest of the color can be anything, so we can just set it to 0000
+
+Now if gbx adds any other limb mask sections. you'll be able to deduce what hexadecimal number this is. (but i'll probably just update this page anyways lol)
 
 
 
