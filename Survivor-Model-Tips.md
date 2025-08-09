@@ -117,3 +117,26 @@ From the discord:
 - *currently only head (ego), rightcalf (goat hoof), and right arm (capacitor) are used*  
 - The model material should use `Hopoo Games/Deferred/Standard` shader and have `Enable Limb Removal` selected.  
   - Since henry uses the unity standard material, in unity, right click the inspector tab and choose Debug, then add `LIMBREMOVAL` to the keywords
+
+### Okay but how
+- Select the vertices of the model that you want to paint. we'll start with Head  
+  <img width="502" height="388" alt="image" src="https://github.com/user-attachments/assets/e7985eb0-0080-42a1-94d4-f931e7d20d08" />
+  - You can just select vertices using Edit mode.
+- Then, move to vertex paint mode  
+  <img width="267" height="217" alt="image" src="https://github.com/user-attachments/assets/6d4f394a-71bc-4f6c-ae07-1207cff052e9" />
+- Next to the dropdown, select Vertex Selection, and select the paintbrush tool, so that the color is available to you  
+  <img width="639" height="463" alt="image" src="https://github.com/user-attachments/assets/30c84c98-6450-464b-be58-b7069210f05d" />
+- Click to change the color we're going to paint. What we're going to do is set the **hex color value**. I will explain what value to use in the next section  
+  <img width="252" height="326" alt="image" src="https://github.com/user-attachments/assets/39a9b490-d695-41b4-a571-762e37d34911" />
+- Click the Paint menu, and hit Set Vertex Colors to apply the colors  
+  <img width="370" height="241" alt="image" src="https://github.com/user-attachments/assets/0f8e8449-5e53-4e51-8b34-83ee0a82c86f" />
+
+### Hex Color Value
+tl;dr 020000 (Head), 030000 (RightArm), 050000 (LeftArm), 0B0000 (RightCalf), 110000 (LeftLeg)
+
+if you've ever wondered what the #FFFFFF color codes are, colors use hexadecimal values
+
+
+
+
+
