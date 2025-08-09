@@ -133,7 +133,7 @@ From the discord:
   <img width="370" height="241" alt="image" src="https://github.com/user-attachments/assets/0f8e8449-5e53-4e51-8b34-83ee0a82c86f" />
 - If this doesn't work you may have to do this: 
   <img width="1042" height="961" alt="image" src="https://github.com/user-attachments/assets/6fd322e6-e408-43cd-8687-d1a3c61d40a7" />
-  - edit > project settings > playser > other settings > optimization > optimize mesh data > turn that off
+  - edit > project settings > player > other settings > optimization > optimize mesh data > turn that off
 
 
 
