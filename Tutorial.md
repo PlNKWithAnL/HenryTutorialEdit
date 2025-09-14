@@ -23,7 +23,7 @@ When creating a character model:
 When exporting your character model from blender into Unity, it's important to fix a scaling issue that can happen if your export settings aren't set correctly.  
 Here are the recommended FBX export settings:  
 ![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/0ff81e54-e4b7-48db-af24-e4de2e85756d)  
-The important things to note are to set `Apply Scalings` to `FBX All`, and turn off `Add Leaf Bones`. Other than that, it doesn't have to look exactly like this.
+The important things to note are to set `Apply Scalings` to `FBX All`, and turn off `Add Leaf Bones`. `Only Deform bones` is also recommended. Other than that, it doesn't have to look exactly like this.
 
 ## Setting up your character prefab in Unity
 
