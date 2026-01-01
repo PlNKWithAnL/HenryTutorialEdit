@@ -12,7 +12,7 @@ Inside the `plugins` folder, you will need to place the mod's .dll file. Place y
 
 ![This is what it should look like inside the plugins folder.](https://github.com/PlNKWithAnL/HenryTutorialEdit/blob/master/Screenshot%202025-12-31%20215338.png?raw=true "This is what it should look like in the plugins folder.")
 
-Once your mod's folder matches the structure above, highlight everything in the `Build` folder and zip it up using your program of choice. Once you have the .zip file of your completed mod, manually import it into your mod manager to test that it works correctly. 
+Now that your your mod's folder matches the structure above, highlight everything in the `Build` folder and zip it up. Once you have the .zip file of your completed mod, manually import it into your mod manager to test that it works correctly. 
 
  - In r2modman, this is done by going to `Settings -> Profile -> Import Local Mod.` 
  - In Gale, click the `Import` dropdown from the top menu navigation bar, and select `...Local Mod`
@@ -25,6 +25,7 @@ After importing the mod into your modmanager, this should be the resulting folde
 
 ![The correct folder structure after import.](https://github.com/PlNKWithAnL/HenryTutorialEdit/blob/master/Screenshot%202025-12-31%20210726.png?raw=true "The correct folder structure after import.")
 
+With the mod successfully imported with the correct file structure, boot the game to test that all your dependencies are present, and that the mod functions as intended.
 
     The henry template will load your assetbundle from a folder next to your .dll named "AssetBundles". 
     If you change this location in your mod's code, make sure the change is reflected in the file structure of your mod.
