@@ -32,7 +32,7 @@ After importing the mod into your modmanager, this should be the resulting folde
     Soundbanks aren't required to be in a folder, so long as they are named with the .sound extension R2API will load them, but it's just nice for organization.
 
 ### Final warning about conflicts
-Do not to upload a mod with the default henry assetbundle, as this will cause conflicts. Simply renaming the file will not suffice. Follow the tutorial to make sure your assetbundle has been rebuilt from unity with a different tag, or we will thanos snap your thunderstore upload.
+DO NOT upload a mod with the default henry assetbundle, as this will cause conflicts. Simply renaming the file will not suffice. Follow the tutorial to make sure your assetbundle has been rebuilt from unity with a different tag, or we will thanos snap your thunderstore upload.
 
 
 ## A Fancier Method
