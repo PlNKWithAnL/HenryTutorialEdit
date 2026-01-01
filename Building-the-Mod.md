@@ -1,30 +1,44 @@
-## Once upon a time
-You used to just built a dll and put it in your plugins folder and run the game.  
-Simple times for simple men. We're big brain now.
-
 ## Folder Structure
-![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/14e6461f-e0fa-4dfd-a9bf-79e1983c61cc)
 
-Here's the folder structure of the final mod installation in your r2modman profile.  
-- The henry template will load your assetbundle from a folder next to your .dll named "AssetBundles".
-- If you're doing language files (see the [Generating Language files(under construction)]() page for details), you'll need a folder next to your .dll named "Languages".
-- Soundbanks aren't required to be in a folder, so long as they are named with the .sound extension R2API will load them, but it's just nice for organization.
+Once you have your built .dll file, you will need to arrange the folder for the mod in such a way that mod managers can import it correctly.
 
-## Installing with r2modman
-Take a gander at how we make this possible in the HenryTutorial\Build folder:  
-![image](https://github.com/ArcPh1r3/HenryTutorial/assets/53384824/c2384457-2249-4179-b63c-2cc4e626c01b)
+Start in the  folder named `HenryTutorial/build`. 
 
-- Open up the manifest.json and change the "name" and "author" fields as you see fit. 
-- Now select these two items and zip them. the manifest.json and plugins folder need to be in the root of the zip
-- you can then import this into r2modman using settings > profile > import local mod. 
-- This mimics how r2modman will download and install your mod from thunderstore when you upload it
-- Now your mod should show up in R2Modman, however unlike downloading a mod online, r2modman won't automatically download all the dependencies. 
-  - Make sure you have those installed as well. They are the ones listed in the manifest.json file
+![image](https://github.com/PlNKWithAnL/JohnnyMod/blob/main/img-2025-12-31-21-50-09.png?raw=true)
 
-Of course, when you go to release your mod, as you (probably) know, you'll need to add an `icon.png` and `readme.md`.
+Located next to the `plugins` folder, open up the manifest.json and change the "name" and "author" fields as you see fit. When you are ready to upload, you will also need to include the readme, a 256x256 .png image for the icon, and if you choose to make one, a separate markdown file for the change log. Make sure the folders, manifest.json, README.md, changelog.md, icon.png, file names and extensions match the image, as any differences will lead to errors when uploading or downloading the mod.
+
+Inside the `plugins` folder, you will need to place the mod's .dll file. Place your built asset bundle into the folder named `AssetBundles`, and your audio file in `Soundbanks`.
+
+![This is what it should look like inside the plugins folder.](https://github.com/PlNKWithAnL/JohnnyMod/blob/main/img-2025-12-31-21-53-45.png?raw=true "This is what it should look like in the plugins folder.")
+
+Once your mod's folder matches the structure above, highlight everything in the `Build` folder and zip it up using your program of choice. Once you have the .zip file of your completed mod, manually import it into your mod manager to test that it works correctly. 
+
+ - In r2modman, this is done by going to `Settings -> Profile -> Import Local Mod.` 
+ - In Gale, click the `Import` dropdown from the top menu navigation bar, and select `...Local Mod`
+
+Navigate to the file location for your mod's .zip file, select it, and confirm.
+
+Depending on your mod manager, you may need to download the mod's dependencies manually. These are listed in the mod's `manifest.json` file. Make sure to complete any updates the mods may need after downloading dependencies.
+
+After importing the mod into your modmanager, this should be the resulting folder structure.
+
+![The correct folder structure after import.](https://github.com/PlNKWithAnL/JohnnyMod/blob/main/img-2025-12-31-21-07-38.png?raw=true "The correct folder structure after import.")
+
+
+    The henry template will load your assetbundle from a folder next to your .dll named "AssetBundles". 
+    If you change this location in your mod's code, make sure the change is reflected in the file structure of your mod.
+    If you're doing language files, you'll need a folder next to your .dll named "Languages".
+    Soundbanks aren't required to be in a folder, so long as they are named with the .sound extension R2API will load them, but it's just nice for organization.
 
 ### Final warning about conflicts
-Do not to upload a mod with the default henry assetbundle, as this will cause conflicts. Simply renaming the file will not suffice. Follow the tutorial to make sure your assetbundle has been rebuilt from unity with a different tag, or we will thanos snap your thunderstore upload
+Do not to upload a mod with the default henry assetbundle, as this will cause conflicts. Simply renaming the file will not suffice. Follow the tutorial to make sure your assetbundle has been rebuilt from unity with a different tag, or we will thanos snap your thunderstore upload.
+
+
+## A Fancier Method
+
+Once upon a time, you used to just build the .dll, zip it up, import it, and run the game, as shown above.
+Simple times for simple men. We're big brain now.
 
 ## Using a Post Build
 When you build a mod, you can set your visual studio .csproj to automatically run some commands after you build. We can use this to automatically copy our built mod into your r2modman profile folder, so you can run the game with your mod
