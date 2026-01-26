@@ -1,16 +1,25 @@
 ## Folder Structure
 
-Once you have your built .dll file, you will need to arrange the folder for the mod in such a way that mod managers can import it correctly.
+Once you have your built .dll file, you will need to arrange the folder for the mod in such a way that mod managers can import it correctly for testing.
 
-Start in the  folder named `HenryTutorial/build`. 
+Here's a quick visualizer for how it will look in your files:
 
-![image](https://github.com/PlNKWithAnL/HenryTutorialEdit/blob/master/Screenshot%202025-12-31%20215002.png?raw=true)
+ - Start in the folder named `HenryTutorial/build`.
+   
+ - Located next to the `plugins` folder, open up the manifest.json and change the "name" and "author" fields as you see fit.
+ 
+ - Inside the `plugins` folder, you will need to place the mod's .dll file. Place your built asset bundle into the folder named `AssetBundles`, and your audio file in `Soundbanks`.
 
-Located next to the `plugins` folder, open up the manifest.json and change the "name" and "author" fields as you see fit. When you are ready to upload, you will also need to include the readme, a 256x256 .png image for the icon, and if you choose to make one, a separate markdown file for the change log. Make sure the folders, manifest.json, README.md, changelog.md, icon.png, file names and extensions match the image, as any differences will lead to errors when uploading or downloading the mod.
-
-Inside the `plugins` folder, you will need to place the mod's .dll file. Place your built asset bundle into the folder named `AssetBundles`, and your audio file in `Soundbanks`.
-
-![This is what it should look like inside the plugins folder.](https://github.com/PlNKWithAnL/HenryTutorialEdit/blob/master/Screenshot%202025-12-31%20215338.png?raw=true "This is what it should look like in the plugins folder.")
+```
+/HenryTutorial/Build
+|_ /Plugins
+|   |_ /AssetBundles
+|   | |_ HenryModAssetBundle
+|   |_ /Soundbanks
+|   | |_ HenryMod.sound
+|   |_HenryMod.dll
+|_manifest.json
+```
 
 Now that your your mod's folder matches the structure above, highlight everything in the `Build` folder and zip it up. Once you have the .zip file of your completed mod, manually import it into your mod manager to test that it works correctly. 
 
