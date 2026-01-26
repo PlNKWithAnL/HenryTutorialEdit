@@ -18,7 +18,7 @@ Your folder structure should now look like this:
 |   | |_ HenryModAssetBundle
 |   |_ /Soundbanks
 |   | |_ HenryMod.sound
-|   |_HenryMod.dll
+|   |_ HenryMod.dll
 |_manifest.json
 ```
 
