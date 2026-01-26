@@ -2,7 +2,7 @@
 
 Once you have your built .dll file, you will need to arrange the folder for the mod in such a way that mod managers can import it correctly for testing.
 
-Here's a quick visualizer for how it will look in your files:
+Here's a quick visualizer for how it will look in your files.
 
  - Start in the folder named `HenryTutorial/build`.
    
@@ -10,6 +10,7 @@ Here's a quick visualizer for how it will look in your files:
  
  - Inside the `plugins` folder, you will need to place the mod's .dll file. Place your built asset bundle into the folder named `AssetBundles`, and your audio file in `Soundbanks`.
 
+Your folder structure should now look like this:
 ```
 /HenryTutorial/Build
 |_ /Plugins
@@ -30,9 +31,9 @@ Navigate to the file location for your mod's .zip file, select it, and confirm.
 
 Depending on your mod manager, you may need to download the mod's dependencies manually. These are listed in the mod's `manifest.json` file. Make sure to complete any updates the mods may need after downloading dependencies.
 
-After importing the mod into your modmanager, this should be the resulting folder structure.
+After importing the zip into your modmanager, this should be the resulting folder structure.
 
-![The correct folder structure after import.](https://github.com/PlNKWithAnL/HenryTutorialEdit/blob/master/Screenshot%202025-12-31%20210726.png?raw=true "The correct folder structure after import.")
+![The correct folder structure after import.](https://github.com/PlNKWithAnL/HenryTutorialEdit/blob/master/%7B86ED79BF-541C-4938-82CF-6A572EA68F34%7D.png?raw=true "The correct folder structure after import.")
 
 With the mod successfully imported with the correct file structure, boot the game to test that all your dependencies are present, and that the mod functions as intended.
 
@@ -42,7 +43,7 @@ With the mod successfully imported with the correct file structure, boot the gam
     Soundbanks aren't required to be in a folder, so long as they are named with the .sound extension R2API will load them, but it's just nice for organization.
 
 ### Final warning about conflicts
-DO NOT upload a mod with the default henry assetbundle, as this will cause conflicts. Simply renaming the file will not suffice. Follow the tutorial to make sure your assetbundle has been rebuilt from unity with a different tag, or we will thanos snap your thunderstore upload.
+DO NOT upload a mod with the default henry assetbundle, as this will cause conflicts. Simply renaming the file will not suffice. Follow the tutorial to make sure your assetbundle has been rebuilt from unity with a different tag, or we will Thanos snap your thunderstore upload.
 
 
 ## A Fancier Method
@@ -98,5 +99,24 @@ Xcopy /E /I /Y "$(ProjectDir)..\Build\plugins" "E:\r2Profiles\Blinx Returns\BepI
   - if you have followed the "Installing with r2modman" section above, a folder with this name should already exist that you can verify
     - if it doesn't, the Xcopy command will create a folder at the specified path anyway, so just be mindful of that
 
+## Getting Ready for Upload 
+
+When you have completed testing and are ready to upload your mod to Thunderstore, follow the instructions [HERE](https://thunderstore.io/package/create/docs/) for info on the required files.
+
+Place the mod's icon, readme, and changelog in the `/HenryTutorial/Build` folder right next to the `plugins` folder and the `manifest.json` file as shown below:
+```
+/HenryTutorial/Build
+|_ /Plugins
+|   |_ /AssetBundles
+|   | |_ HenryModAssetBundle
+|   |_ /Soundbanks
+|   | |_ HenryMod.sound
+|   |_ HenryMod.dll
+|_ manifest.json
+|_ readme.md
+|_ icon.png
+|_ changelog.md
+```
+Zip the contents of the build folder up, and upload.
 ___
 happy building! any questions go and bother `thetimesweeper`
